@@ -49,7 +49,7 @@ namespace Soneta.Szkolenie
         public new Maszyna Maszyna 
         {
             get => base.Maszyna;
-            set => value = base.Maszyna;
+            set => base.Maszyna = value;
         }
 
         [AttributeInheritance]

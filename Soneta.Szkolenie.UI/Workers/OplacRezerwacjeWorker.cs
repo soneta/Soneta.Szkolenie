@@ -6,7 +6,7 @@ using Soneta.Szkolenie.UI;
 using Soneta.Tools;
 using Soneta.Types;
 
-//[assembly: Worker(typeof(OplacRezerwacjeWorker), typeof(Rezerwacja))]
+[assembly: Worker(typeof(OplacRezerwacjeWorker), typeof(Rezerwacja))]
 
 namespace Soneta.Szkolenie.UI
 {
@@ -18,11 +18,11 @@ namespace Soneta.Szkolenie.UI
 
         [Context]
         public Rezerwacja Rezerwacja { get; set; }
-        // TODO -> Należy podmienić podany opis akcji na bardziej czytelny dla uzytkownika
 
         [Action("Loty widokowe/Opłać rezerwcję", 
+            IconName = "EwidencjaSP",
             Mode = ActionMode.SingleSession | ActionMode.ConfirmSave | ActionMode.Progress, 
-            Target = ActionTarget.ToolbarWithText)]
+            Target = ActionTarget.Menu | ActionTarget.Toolbar)]
         public MessageBoxInformation OplacRezerwacje()
         {
 
