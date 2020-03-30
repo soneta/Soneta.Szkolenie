@@ -20,7 +20,6 @@ namespace Soneta.Szkolenie.UI
         public Rezerwacja Rezerwacja { get; set; }
 
         [Action("Loty widokowe/Opłać rezerwcję", 
-            IconName = "EwidencjaSP",
             Mode = ActionMode.SingleSession | ActionMode.ConfirmSave | ActionMode.Progress, 
             Target = ActionTarget.Menu | ActionTarget.Toolbar)]
         public MessageBoxInformation OplacRezerwacje()
