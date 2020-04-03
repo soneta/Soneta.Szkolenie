@@ -24,17 +24,14 @@ namespace Soneta.Szkolenie.UI
         public object UstawRabat()
         {
             var WybraniKontrahenci = @params.Context[typeof(Kontrahent[]), false] as Kontrahent[];
-
             if (WybraniKontrahenci.Length == 0)
                 return "Nie wybrano żadnego kontrahenta.";
 
             var doZmiany = new List<Kontrahent>();
-
             foreach (var kth in WybraniKontrahenci)
             {
                 var nowyRabat = @params.DodawacRabaty ? kth.RabatTowaru + @params.Rabat : @params.Rabat;
-
-                if (!@params.ObnizacRabaty && nowyRabat < kth.Rabat)
+                if (!@params.ObnizacRabaty && nowyRabat < kth.RabatTowaru)
                     continue;
 
                 doZmiany.Add(kth);
@@ -45,18 +42,24 @@ namespace Soneta.Szkolenie.UI
 
             return new MessageBoxInformation("Ustawienie rabatu?")
             {
-                Text = "Czy ustawić rabat ({0}) wybranym kontrahentom ({1})?"
-                    .TranslateFormat(doZmiany.Count, @params.Rabat),
-                YesHandler = () =>
-                {
-                    using (var t = @params.Session.Logout(true))
-                    {
-                        t.Commit();
-                    }
-                    return "Operacja została zakończona";
-                },
-                NoHandler = () => "Operacja przerwana"
+                Text = "Czy ustawić rabat ({0}) wybranym kontrahentom ({1})?".TranslateFormat(doZmiany.Count, @params.Rabat),
+                YesHandler = () => SetRabat(doZmiany),
+                NoHandler = () => null
             };
+
+        }
+        private object SetRabat(List<Kontrahent> doZmiany)
+        {
+            using (var t = @params.Session.Logout(true))
+            {
+                foreach (var k in doZmiany)
+                {
+                    k.RabatTowaru = @params.DodawacRabaty ? k.RabatTowaru + @params.Rabat : @params.Rabat;
+                }
+
+                t.Commit();
+            }
+            return null;
         }
     }
 
