@@ -57,7 +57,6 @@ namespace Soneta.Szkolenie.UI
                 },
                 NoHandler = () => "Operacja przerwana"
             };
-
         }
     }
 

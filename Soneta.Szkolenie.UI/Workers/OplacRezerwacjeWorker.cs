@@ -12,19 +12,15 @@ namespace Soneta.Szkolenie.UI
 {
     public class OplacRezerwacjeWorker
     {
-
         [Context]
         public Context Context { get; set; }
 
         [Context]
         public Rezerwacja Rezerwacja { get; set; }
 
-        [Action("Loty widokowe/Opłać rezerwcję", 
-            Mode = ActionMode.SingleSession | ActionMode.ConfirmSave | ActionMode.Progress, 
-            Target = ActionTarget.Menu | ActionTarget.Toolbar)]
+        [Action("Loty widokowe/Opłać rezerwcję", Mode = ActionMode.SingleSession | ActionMode.OnlyForm, Target = ActionTarget.Menu | ActionTarget.Toolbar)]
         public MessageBoxInformation OplacRezerwacje()
         {
-
             return new MessageBoxInformation("Opłać rezerwację?".Translate())
             {
                 Text = "Czy oznaczyć rezerwację jako zapłaconą".Translate(),
@@ -33,20 +29,9 @@ namespace Soneta.Szkolenie.UI
             };
         }
 
-        public bool IsVisibleOplacRezerwacje()
-        {
-            var uiLocation = Context[typeof(UILocation)] as UILocation;
-            return (uiLocation.FolderNormalizedPath == "LotyWidokowe/Rezerwacje" || uiLocation.FolderNormalizedPath == "LotyWidokowe/Klienci");
-        }
-
-        public bool IsEnabledOplacRezerwacje()
-        {
-            return Rezerwacja.CzyOplacona != CzyOplacone.Oplacone;
-        }
-
         private object OplataRezerwacji()
         {
-            if (Rezerwacja==null)
+            if (Rezerwacja == null)
             {
                 return "Brak rezerwacji w kontekście";
             }
@@ -60,7 +45,22 @@ namespace Soneta.Szkolenie.UI
                 t.Commit();
             }
 
-            return "Rezerwacja opłacona".Translate();
+            return new MessageBoxInformation("Opłacona".Translate())
+            {
+                Text = "Rezerwacja opłacona".Translate(),
+                OKHandler = () => FormAction.SaveAndClose
+            };
+        }
+
+        public bool IsVisibleOplacRezerwacje()
+        {
+            var uiLocation = Context[typeof(UILocation)] as UILocation;
+            return (uiLocation.FolderNormalizedPath == "LotyWidokowe/Rezerwacje" || uiLocation.FolderNormalizedPath == "LotyWidokowe/Klienci");
+        }
+
+        public bool IsEnabledOplacRezerwacje()
+        {
+            return Rezerwacja.CzyOplacona != CzyOplacone.Oplacone;
         }
     }
 }
