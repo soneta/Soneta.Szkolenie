@@ -20,21 +20,39 @@ namespace Soneta.Szkolenie.UI
 
         public class RezerwacjeParams : ContextBase // Klasa parametrów używanych w filtrze. Musi dziedziczyć z klasy ContextBase
         {
-            private readonly string key = "Szkolenie.RezerwacjeViewFilter"; // klucz używany do ujednoznacznienia zapisu parametrów
+            public RezerwacjeParams(Context context) : base(context) {}
 
-            public RezerwacjeParams(Context context) : base(context) {
-            }
-
+            private Maszyna _maszyna = null;
             public Maszyna Maszyna
             {
-                get;
-                set;
+                get => _maszyna;
+                set
+                {
+                    _maszyna = value;
+                    Context.Set(this);
+                }
             }
 
+            private Kontrahent _klient = null;
             public Kontrahent Klient
             {
-                get;
-                set;
+                get => _klient;
+                set
+                {
+                    _klient = value;
+                    Context.Set(this);
+                }
+            }
+
+            private CzyOplacone _czyOplacone;
+            private CzyOplacone CzyOplacone
+            {
+                get => _czyOplacone;
+                set
+                {
+                    _czyOplacone = value;
+                    Context.Set(this);
+                }
             }
         }
 
