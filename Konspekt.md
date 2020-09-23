@@ -7,12 +7,12 @@
   1. Warstwa "Tests" - porzucamy bo nie będziemy się nim zajmowac na tym szkoleniu.
   1. Ustawiamy wersję enova365 i atrybuty AppendTargetFrameworkToOutputPath, AggregateOutput, AggregatePath w Directory.build.props.
   1. Dodajemy odniesienie do business w UI - ułatwia to pracę nad dodatkiem.
-  1. Uruchomienie dodatku: executable SonetaExplorer.exe z parametrem **/extpath="_katalog_"**.
+  1. Uruchomienie dodatku: SonetaAddonStartProgram lub w Debug executable SonetaExplorer.exe z parametrem **/extpath="_katalog_"**.
  
 ## Zad.1. Dodawanie własnego widoku (Klienci) z danych enova365 - szablon ViewInfo
   1. Wygenerowanie klasy ViewInfo i pliku viewinfo.xml z szablonu "Soneta - ViewInfo".
   1. Rejestracja kafelka widoku i podwidoku.
-  1. Uzupełnienie kodu wewnątrz ViewInfo: CreateView.
+  1. Uzupełnienie kodu wewnątrz ViewInfo: CreateView. Filtr stały - bez konrahenta standarowego !INCYDENTALNY
   1. Utworzenie viewform.xml.
 
 ## Zad.2. Definiowanie workera (UstawRabat) na wybranej tabeli - szablon Worker.
@@ -36,7 +36,7 @@
 
 ## Zad.4. Widoki nowych tabel dodatku
   1. Utworzenie własnego widoku (ViewForm) dla nowych obiektów dodatku: KatalogLotów.
-  1. Dodanie pozostałych ViewForms: KatalogSamolotów i Rezerwacje.
+  1. Dodanie pozostałych ViewForms: KatalogMaszyn i Rezerwacje.
   1. Filtry listy - klasy parametrów filtrów widoków.
   1. Definicje wyglądu list: viewform.xml.
   1. Atrybuty RemoveButton, EditButton, NewButton.
@@ -53,5 +53,5 @@
   
 ## Zad.6 Zakładka lotów Kontrahenta - Extender
   1. Utworzenie extendera KontrahentExtender z szablonu "Soneta - PageForm" - rozszerzamy obiekt Kontrahent.
-  1. Przeniesienie KontrahentExtender.cs do warswy business
+  1. Przeniesienie KontrahentExtender.cs do warstwy business
   1. Zdefiniowanie pól extendera: RezerwacjeKontrahenta jako View
