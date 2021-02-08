@@ -10,13 +10,14 @@
     -->
     <Field CaptionHtml="Maszyna" EditValue="{RezerwacjeViewInfo+RezerwacjeParams.Maszyna}" />
     <Field CaptionHtml="Klient" EditValue="{RezerwacjeViewInfo+RezerwacjeParams.Klient}" />
+    <Field CaptionHtml="Opłacone" EditValue="{RezerwacjeViewInfo+RezerwacjeParams.CzyOplacone}" />
   </Flow>
   <Grid Name="List" OrderBy="NrRezerwacji">
     <Field EditValue="{NrRezerwacji}" CaptionHtml="Nr" Width="8"/>
     <Field EditValue="{Klient}" Width="40"/>
     <Field EditValue="{Maszyna}" Width="30" />
     <Field EditValue="{Lot}" Width="30"/>
-    <Field EditValue="{Lot.Cena}" CaptionHtml="Cena" Width="14"/>
+    <Field EditValue="{CenaLotu}" CaptionHtml="Cena" Width="14"/>
     <Field EditValue="{CzyOplacona}" CaptionHtml="Opłacona" />
   </Grid>
 </DataForm>

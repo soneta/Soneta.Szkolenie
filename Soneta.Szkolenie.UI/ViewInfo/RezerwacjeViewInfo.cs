@@ -45,7 +45,7 @@ namespace Soneta.Szkolenie.UI
             }
 
             private CzyOplacone _czyOplacone;
-            private CzyOplacone CzyOplacone
+            public CzyOplacone CzyOplacone
             {
                 get => _czyOplacone;
                 set
@@ -74,6 +74,8 @@ namespace Soneta.Szkolenie.UI
                 cond &= new FieldCondition.Equal("Maszyna", parameters.Maszyna);
             if (parameters.Klient != null)
                 cond &= new FieldCondition.Equal("Klient", parameters.Klient);
+            if (parameters.CzyOplacone != CzyOplacone.Razem)
+                cond &= new FieldCondition.Equal("CzyOplacone", parameters.CzyOplacone);
 
             args.View.Condition = cond;
         }

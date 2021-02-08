@@ -10,7 +10,7 @@
   1. Uruchomienie dodatku: SonetaAddonStartProgram lub w Debug executable SonetaExplorer.exe z parametrem **/extpath="_katalog_"**.
  
 ## Zad.1. Dodawanie własnego widoku (Klienci) z danych enova365 - szablon ViewInfo
-  1. Wygenerowanie klasy ViewInfo i pliku viewinfo.xml z szablonu "Soneta - ViewInfo".
+  1. Wygenerowanie klasy ViewInfo i pliku viewform.xml z szablonu "Soneta - ViewInfo".
   1. Rejestracja kafelka widoku i podwidoku.
   1. Uzupełnienie kodu wewnątrz ViewInfo: CreateView. Filtr stały - bez konrahenta standarowego !INCYDENTALNY
   1. Utworzenie viewform.xml.

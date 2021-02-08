@@ -4,6 +4,7 @@ using Soneta.Business;
 using Soneta.Business.App;
 using Soneta.CRM;
 using Soneta.Szkolenie;
+using Soneta.Types;
 
 
 // Sposób w jaki należy zarejestrować extender, który później zostanie użyty w UI.
@@ -21,6 +22,18 @@ namespace Soneta.Szkolenie
 
         [Context]
         public Kontrahent Kontrahent { get; set; }
+
+        [Context]
+        public Context Context { get; set; }
+
+        public bool IsVisible
+        {
+            get
+            {
+                var uiNav = this.Context[typeof(UILocation), false] as UILocation;
+                return uiNav.FolderNormalizedPath == "LotyWidokowe/Klienci";
+            }
+        }
 
         public View RezerwacjeLotow 
             => SzkolenieModule.GetInstance(Kontrahent).Rezerwacje.WgKlient[Kontrahent].CreateView();

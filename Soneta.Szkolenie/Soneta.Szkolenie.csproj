@@ -3,8 +3,4 @@
   <PropertyGroup>
     <TargetFramework>$(SonetaTargetFramework)</TargetFramework>
   </PropertyGroup>
-  <ItemGroup>
-    <None Update="Szkolenie.business.xml">
-    </None>
-  </ItemGroup>
 </Project>

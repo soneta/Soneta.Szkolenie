@@ -38,7 +38,7 @@ namespace Soneta.Szkolenie
 
                 var poRabacie = Percent.Hundred;
                 if (Klient != null)
-                    poRabacie -= Klient.Rabat;
+                    poRabacie -= Klient.RabatTowaru;
 
                 CenaLotu = Lot.Cena * poRabacie;
             }

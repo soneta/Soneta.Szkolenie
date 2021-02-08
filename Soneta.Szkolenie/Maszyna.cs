@@ -36,13 +36,5 @@ namespace Soneta.Szkolenie
             // funkcja zwracająca komunikat wyświetlany w przypadku błędu
             public override string Description => "Wymagane jest aby w numerze bocznym znajdował się znak -";
         }
-
-        protected override void OnAdded()
-        {
-            base.OnAdded();
-
-            // w tym miejscu można zainicjować interesujące nas pola nowego wiersza
-            DataProd = Date.Today;
-        }
     }
 }
