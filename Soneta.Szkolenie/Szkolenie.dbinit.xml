@@ -1,8 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<session versionName="SonetaSzkolenie">
+<!-- 
+******** UWAGA!!! ********
+  Plik dbinit.xml tworzy w zakładanej bazie danych rekordy opisane poniżej tylko przy tworzeniu samych tabel.
+  Dodawanie ich później, kiedy tabele już istnieją - nie zostanie wykonane
+-->
 
-  <Lot guid="{79B27D3E-D0F0-4729-AC78-09F0A57CA65C}">
+<session versionName="Szkolenie">
+
+  <Lot guid="{E943924A-7D9D-4EDB-A6FD-5E9F5EE3BE49}">
     <KodUslugi>GRC</KodUslugi>
     <Nazwa>Lot nad Gorcami</Nazwa>
     <Cena>1500</Cena>

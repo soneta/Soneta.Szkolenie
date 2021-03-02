@@ -6,10 +6,34 @@
           Priority="0"
           DataType="Soneta.Szkolenie.UI.UstawRabatWorkerParams,Soneta.Szkolenie.UI">
   <Page Name="UstawRabatWorkerParamsPage" CaptionHtml="Ustaw rabat kontrahenta" DataContext="{DataSource}">
-    <Group>
-      <Field EditValue="{Rabat}" Width="30"/>
-      <Field EditValue="{DodawacRabaty}" Width="7" CaptionHtml="Czy dodawać rabaty" />
-      <Field EditValue="{ObnizacRabaty}" Width="7" CaptionHtml="Czy obniżać rabat"  />
-    </Group>
+[12:09] pg (Gość)
+<?xml version="1.0"?>
+
+<DataForm Contexts="License.All" 
+
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+          xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+
+          xmlns="http://www.enova.pl/schema/form.xsd"
+
+          xsi:schemaLocation="http://www.enova.pl/schema/ http://www.enova.pl/schema/form.xsd">
+
+  <Flow Name="FilterPanel">
+
+  </Flow>   <Grid Name="List" RemoveButton="None" EditButton="None" NewButton="None" IsToolbarVisible="false">
+
+      <Field CaptionHtml="Kod" EditValue="{​​​​Kod}​​​​" Width="20" />
+
+      <Field CaptionHtml="Nazwa" EditValue="{​​​​Nazwa}​​​​" Width="80" />
+
+      <Field CaptionHtml="Adres" EditValue="{​​​​Adres}​​​​" Width="*" />
+
+      <Field CaptionHtml="Kategoria" EditValue="{​​​​Kategoria}​​​​" Width="40" />
+
+  </Grid>
+
+</DataForm>
+
   </Page>
 </DataForm>

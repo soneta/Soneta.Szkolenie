@@ -18,6 +18,32 @@ namespace Soneta.Szkolenie.UI
             CreateView += RezerwacjeViewInfo_CreateView;
         }
 
+        private void RezerwacjeViewInfo_InitContext(object sender, ContextEventArgs args)
+        {
+            if (!args.Context.Contains(typeof(RezerwacjeParams)))
+                args.Context.Set(new RezerwacjeParams(args.Context)); // dodanie parametrów do kontekstu jeśli nie istnieją
+        }
+
+        private void RezerwacjeViewInfo_CreateView(object sender, CreateViewEventArgs args)
+        {
+            var parameters = new RezerwacjeParams(args.Context);
+            args.Context.Get(out parameters); // ew. pobranie parametrów z kontekstu
+
+            args.View = ViewCreate(parameters); // utworzenie View
+            var cond = RowCondition.Empty; // i uzupełnienie warunków wg ustawionych parametrów
+
+            if (parameters.Maszyna != null)
+                cond &= new FieldCondition.Equal("Maszyna", parameters.Maszyna);
+            if (parameters.Klient != null)
+                cond &= new FieldCondition.Equal("Klient", parameters.Klient);
+            if (parameters.CzyOplacone != Soneta.Szkolenie.CzyOplacone.Razem)
+                cond &= new FieldCondition.Equal("CzyOplacone", parameters.CzyOplacone);
+
+            args.View.Condition = cond;
+        }
+
+        private View ViewCreate(RezerwacjeParams pars) => pars.Session.GetSzkolenie().Rezerwacje.CreateView();
+
         public class RezerwacjeParams : ContextBase // Klasa parametrów używanych w filtrze. Musi dziedziczyć z klasy ContextBase
         {
             public RezerwacjeParams(Context context) : base(context) {}
@@ -55,31 +81,5 @@ namespace Soneta.Szkolenie.UI
                 }
             }
         }
-
-        private void RezerwacjeViewInfo_InitContext(object sender, ContextEventArgs args)
-        {
-            if (!args.Context.Contains(typeof(RezerwacjeParams)))
-                args.Context.Set(new RezerwacjeParams(args.Context)); // dodanie parametrów do kontekstu jeśli nie istnieją
-        }
-
-        private void RezerwacjeViewInfo_CreateView(object sender, CreateViewEventArgs args)
-        {
-            var parameters = new RezerwacjeParams(args.Context);
-            args.Context.Get(out parameters); // ew. pobranie parametrów z kontekstu
-
-            args.View = ViewCreate(parameters); // utworzenie View
-            var cond = RowCondition.Empty; // i uzupełnienie warunków wg ustawionych parametrów
-
-            if (parameters.Maszyna != null)
-                cond &= new FieldCondition.Equal("Maszyna", parameters.Maszyna);
-            if (parameters.Klient != null)
-                cond &= new FieldCondition.Equal("Klient", parameters.Klient);
-            if (parameters.CzyOplacone != Soneta.Szkolenie.CzyOplacone.Razem)
-                cond &= new FieldCondition.Equal("CzyOplacone", parameters.CzyOplacone);
-
-            args.View.Condition = cond;
-        }
-
-        private View ViewCreate(RezerwacjeParams pars) => pars.Session.GetSzkolenie().Rezerwacje.CreateView();
     }
 }

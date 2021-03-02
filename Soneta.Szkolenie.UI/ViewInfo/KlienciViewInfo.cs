@@ -22,6 +22,10 @@ namespace Soneta.Szkolenie.UI
         {
         }
 
-        void KlienciViewInfo_CreateView(object sender, CreateViewEventArgs args) => args.Session.GetCRM().Kontrahenci.CreateView();
+        void KlienciViewInfo_CreateView(object sender, CreateViewEventArgs args) {
+            var view = CRMModule.GetInstance(args.Session).Kontrahenci.WgKodu.CreateView();
+            view.Condition &= new FieldCondition.Equal("IsStandard",false);
+            args.View = view;
+        }
     }
 }

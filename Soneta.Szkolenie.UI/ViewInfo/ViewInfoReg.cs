@@ -1,9 +1,8 @@
 ﻿using Soneta.Business.UI;
+using Soneta.Szkolenie.UI;
 
-/* Rejestracje folderów dodatku przeniesione z poszczególnych plików ViewInfo tutaj w celach porządkowych */
-
-// Główny folder dodatku, umieszczony w głównym widoku bazy danych
-[assembly: FolderView("Loty widokowe", // wymagane: to jest tekst na kaflu
+[assembly: FolderView("LotyWidokowe", // wymagane: to ścieżka folderu
+    Caption = "Loty widokowe", // niewymagane - jeśli nie podane, pobrane będzie ze ścieżki powyżej
     Priority = 0, // opcjonalne: Priority = 0 umieszcza kafel blisko lewej górnej strony widoku kafli
     Description = "Szkolenie techniczne - przykład dodatku", // opcjonalne: opis poniżej tytułu kafla
     BrickColor = FolderViewAttribute.BlueBrick, // opcjonalne: Kolor kafla
@@ -11,33 +10,34 @@
                              // Więcej nie ma potrzeby definiować bo jest to kafel "organizacyjny" - przechodzący do widoku innych kafli
 )]
 
-// Poszczególne foldery widoków wewnątrz głównego "kafla"
-[assembly: FolderView("Loty widokowe/Klienci", // Tu widać ścieżkę definiującą strukturę drzewa kafli
+[assembly: FolderView("LotyWidokowe/Klienci",
     Priority = 0,
     Description = "Klienci",
-    TableName = "Kontrahenci", // wymagane dla list: Nazwa tabeli, z której tworzone jest to ViewInfo
-    ViewType = typeof(Soneta.Szkolenie.UI.KlienciViewInfo), // wymagane dla list: dokładne wskazanie klasy ViewInfo, 
-                                                            // która zostanie użyta do wyświetenia widoku pod tym kaflem
-    BrickColor = FolderViewAttribute.YellowBrick // opcjonalne: ten jeden kafel będzie żółty
+    TableName = "Kontrahenci", // Tabela, której widok będzie prezentowany
+    ViewType = typeof(KlienciViewInfo), // ViewInfo, które będzie użyte do wyświetlenia listy
+    BrickColor = FolderViewAttribute.YellowBrick
 )]
 
-[assembly: FolderView("Loty widokowe/Katalog lotów",
+[assembly: FolderView("LotyWidokowe/Loty",
+    Caption = "Katalog lotów",
     Priority = 100,
     Description = "Katalog lotów",
     TableName = "Loty",
-    ViewType = typeof(Soneta.Szkolenie.UI.KatalogLotowViewInfo)
+    ViewType = typeof(KatalogLotowViewInfo)
 )]
 
-[assembly: FolderView("Loty widokowe/Katalog maszyn",
+[assembly: FolderView("LotyWidokowe/Maszyny",
+    Caption = "Katalog maszyn",
     Priority = 200,
     Description = "Katalog maszyn",
     TableName = "Maszyny",
-    ViewType = typeof(Soneta.Szkolenie.UI.KatalogMaszynViewInfo)
+    ViewType = typeof(KatalogMaszynViewInfo)
 )]
 
-[assembly: FolderView("Loty widokowe/Rezerwacje",
+[assembly: FolderView("LotyWidokowe/Rezerwacje",
     Priority = 300,
     Description = "Lista rezerwacji",
     TableName = "Rezerwacje",
-    ViewType = typeof(Soneta.Szkolenie.UI.RezerwacjeViewInfo)
+    ViewType = typeof(RezerwacjeViewInfo),
+    BrickColor = FolderViewAttribute.BlackBrick
 )]

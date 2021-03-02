@@ -6,16 +6,15 @@
   1. Warstwa biznesowa i warstwa UI - czemu oddzielnie?
   1. Warstwa "Tests" - porzucamy bo nie będziemy się nim zajmowac na tym szkoleniu.
   1. Ustawiamy wersję enova365 i atrybuty AppendTargetFrameworkToOutputPath, AggregateOutput, AggregatePath w Directory.build.props.
-  1. Dodajemy odniesienie do business w UI - ułatwia to pracę nad dodatkiem.
+  1. Dodajemy projekt startowy i odniesienie do projektu business w projekcie UI - ułatwia to pracę nad dodatkiem.
   1. Uruchomienie dodatku: SonetaAddonStartProgram lub w Debug executable SonetaExplorer.exe z parametrem **/extpath="_katalog_"**.
  
 ## Zad.1. Dodawanie własnego widoku (Klienci) z danych enova365 - szablon ViewInfo
   1. Wygenerowanie klasy ViewInfo i pliku viewform.xml z szablonu "Soneta - ViewInfo".
-  2. Rejestracja kafelka folderu i widoku.
-  3. Przeniesienie rejestracji do osobnego pliku.
-  5. Uzupełnienie kodu wewnątrz ViewInfo: CreateView.
-  6. Filtr stały - bez konrahenta standarowego !INCYDENTALNY
-  7. Utworzenie viewform.xml.
+  1. Rejestracja kafelka folderu i widoku.
+  1. Uzupełnienie kodu wewnątrz ViewInfo: CreateView.
+  1. Filtr stały - bez konrahenta standarowego !INCYDENTALNY
+  1. Uzupełnienie viewform.xml.
 
 ## Zad.2. Definiowanie workera (UstawRabat) na wybranej tabeli - szablon Worker.
   1. Wygenerowanie klasy workera z szablonu "Soneta - Worker".
@@ -29,15 +28,17 @@
 ## Zad.3. Rozszerzanie bazy danych - szablon Business Xml
   1. Utworzenie pliku business.xml, w celu rozszerzenia bazy danych, przy pomocy szablonu "Soneta - Business Xml".
   1. Utworzenie wpisów dotyczących nowych tabel - GUIDed: root i child - relacje.
-  1. Wygenerowanie business.cs (rebuild solution).
-  1. Poprawa błędów kompilacji - dodanie własnych klas-przelotek dla obiektów biznesowych: wierszy i tabel.
-  1. Utworzenie klasy weryfikatora i enuma.
-  1. Utworzenie pliku dbinit.xml - inicjowanie tabeli Loty.
-  1. Uruchomienie enova365 i konwersja bazy. Tabele można zobaczyć w Podglądzie tabel.
-  1. UWAGA! Założone tabele będą wymagały już stale naszego dodatku. Lepiej nie uruchamiać programu bez niego.
+  2. Dodanie zadeklarowanego enuma
+  3. Wygenerowanie business.cs (rebuild solution).
+  4. Poprawa błędów kompilacji - dodanie własnych klas-przelotek dla obiektów biznesowych: wierszy i tabel.
+  5. Utworzenie klasy weryfikatora i enuma.
+  6. Utworzenie pliku dbinit.xml - inicjowanie tabeli Loty.
+  7. Uruchomienie enova365 i konwersja bazy. Tabele można zobaczyć w Podglądzie tabel.
+  8. UWAGA! Założone tabele będą wymagały już stale naszego dodatku. Lepiej nie uruchamiać programu bez niego.
 
 ## Zad.4. Widoki nowych tabel dodatku
   1. Utworzenie własnego widoku (ViewForm) dla nowych obiektów dodatku: KatalogLotów.
+  1. Przeniesienie rejestracji do osobnego pliku.
   1. Dodanie pozostałych ViewForms: KatalogMaszyn i Rezerwacje.
   1. Definicje wyglądu list: viewform.xml.
   1. Atrybuty RemoveButton, EditButton, NewButton.
