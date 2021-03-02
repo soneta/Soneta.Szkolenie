@@ -1,4 +1,5 @@
 ﻿using Soneta.Business;
+using Soneta.Szkolenie;
 
 namespace Soneta.Szkolenie.UI
 {
@@ -35,10 +36,6 @@ namespace Soneta.Szkolenie.UI
             public WParams(Context context) : base(context) {}
         }
 
-        protected View ViewCreate(WParams pars)
-        {
-            View view = SzkolenieModule.GetInstance(pars.Session).Maszyny.CreateView();
-            return view;
-        }
+        protected View ViewCreate(WParams pars) => pars.Session.GetSzkolenie().Maszyny.CreateView();
     }
 }

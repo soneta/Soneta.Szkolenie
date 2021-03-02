@@ -1,6 +1,6 @@
 ﻿using Soneta.Business;
 using Soneta.CRM;
-using System;
+using Soneta.Szkolenie;
 
 namespace Soneta.Szkolenie.UI
 {
@@ -74,16 +74,12 @@ namespace Soneta.Szkolenie.UI
                 cond &= new FieldCondition.Equal("Maszyna", parameters.Maszyna);
             if (parameters.Klient != null)
                 cond &= new FieldCondition.Equal("Klient", parameters.Klient);
-            if (parameters.CzyOplacone != CzyOplacone.Razem)
+            if (parameters.CzyOplacone != Soneta.Szkolenie.CzyOplacone.Razem)
                 cond &= new FieldCondition.Equal("CzyOplacone", parameters.CzyOplacone);
 
             args.View.Condition = cond;
         }
 
-        private View ViewCreate(RezerwacjeParams pars)
-        {
-            View view = SzkolenieModule.GetInstance(pars.Session).Rezerwacje.CreateView();
-            return view;
-        }
+        private View ViewCreate(RezerwacjeParams pars) => pars.Session.GetSzkolenie().Rezerwacje.CreateView();
     }
 }
