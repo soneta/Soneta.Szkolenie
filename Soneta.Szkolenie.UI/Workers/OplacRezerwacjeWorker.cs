@@ -29,6 +29,17 @@ namespace Soneta.Szkolenie.UI
             };
         }
 
+        public bool IsVisibleOplacRezerwacje()
+        {
+            var uiLocation = Context[typeof(UILocation)] as UILocation;
+            return (uiLocation.FolderNormalizedPath == "LotyWidokowe/Rezerwacje" || uiLocation.FolderNormalizedPath == "LotyWidokowe/Klienci");
+        }
+
+        public bool IsEnabledOplacRezerwacje()
+        {
+            return Rezerwacja.CzyOplacona != CzyOplacone.Oplacone;
+        }
+
         private object OplataRezerwacji()
         {
             if (Rezerwacja == null)
@@ -50,17 +61,6 @@ namespace Soneta.Szkolenie.UI
                 Text = "Rezerwacja opłacona".Translate(),
                 OKHandler = () => FormAction.SaveAndClose
             };
-        }
-
-        public bool IsVisibleOplacRezerwacje()
-        {
-            var uiLocation = Context[typeof(UILocation)] as UILocation;
-            return (uiLocation.FolderNormalizedPath == "LotyWidokowe/Rezerwacje" || uiLocation.FolderNormalizedPath == "LotyWidokowe/Klienci");
-        }
-
-        public bool IsEnabledOplacRezerwacje()
-        {
-            return Rezerwacja.CzyOplacona != CzyOplacone.Oplacone;
         }
     }
 }

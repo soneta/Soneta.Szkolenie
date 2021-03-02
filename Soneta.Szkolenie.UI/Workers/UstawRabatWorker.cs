@@ -14,11 +14,7 @@ namespace Soneta.Szkolenie.UI
     public class UstawRabatWorker
     {
         [Context]
-        public UstawRabatWorkerParams @params
-        {
-            get;
-            set;
-        }
+        public UstawRabatWorkerParams @params { get; set; }
 
         [Action("Loty widokowe/Ustaw rabat", Mode = ActionMode.SingleSession | ActionMode.ConfirmSave | ActionMode.Progress)]
         public object UstawRabat()
