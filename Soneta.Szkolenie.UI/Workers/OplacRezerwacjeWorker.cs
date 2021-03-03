@@ -32,7 +32,8 @@ namespace Soneta.Szkolenie.UI
         public bool IsVisibleOplacRezerwacje()
         {
             var uiLocation = Context[typeof(UILocation)] as UILocation;
-            return (uiLocation.FolderNormalizedPath == "LotyWidokowe/Rezerwacje" || uiLocation.FolderNormalizedPath == "LotyWidokowe/Klienci");
+            return Rezerwacja.State != RowState.Added &&
+                (uiLocation.FolderNormalizedPath == "LotyWidokowe/Rezerwacje" || uiLocation.FolderNormalizedPath == "LotyWidokowe/Klienci");
         }
 
         public bool IsEnabledOplacRezerwacje()

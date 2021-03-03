@@ -5,8 +5,7 @@ using Soneta.Szkolenie.UI;
     Caption = "Loty widokowe", // niewymagane - jeśli nie podane, pobrane będzie ze ścieżki powyżej
     Priority = 0, // opcjonalne: Priority = 0 umieszcza kafel blisko lewej górnej strony widoku kafli
     Description = "Szkolenie techniczne - przykład dodatku", // opcjonalne: opis poniżej tytułu kafla
-    BrickColor = FolderViewAttribute.BlueBrick, // opcjonalne: Kolor kafla
-    Icon = "TableFolder.ico" // opcjonalne: Ikona wyświetlana na kaflu
+    BrickColor = FolderViewAttribute.BlueBrick // opcjonalne: Kolor kafla
                              // Więcej nie ma potrzeby definiować bo jest to kafel "organizacyjny" - przechodzący do widoku innych kafli
 )]
 

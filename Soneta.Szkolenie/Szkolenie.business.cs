@@ -17,7 +17,7 @@ using Soneta.Business;
 using Soneta.CRM;
 using Soneta.Szkolenie;
 
-[assembly: ModuleType("Szkolenie", typeof(Soneta.Szkolenie.SzkolenieModule), 4, "SonetaSzkolenie", 3, VersionNumber=1)]
+[assembly: ModuleType("Szkolenie", typeof(Soneta.Szkolenie.SzkolenieModule), 4, "Szkolenie", 3, VersionNumber=1)]
 
 namespace Soneta.Szkolenie {
 
@@ -136,6 +136,8 @@ namespace Soneta.Szkolenie {
 
 			protected LotRow() : base(true) {
 			}
+
+			protected override Row PrimaryRow => null;
 
 			[MaxLength(6)]
 			[Required]
@@ -544,6 +546,8 @@ namespace Soneta.Szkolenie {
 			protected MaszynaRow() : base(true) {
 			}
 
+			protected override Row PrimaryRow => null;
+
 			[MaxLength(6)]
 			[Required]
 			public string NrBoczny {
@@ -836,10 +840,13 @@ namespace Soneta.Szkolenie {
 		public Rezerwacje Rezerwacje => (Rezerwacje)Session.Tables[tableInfoRezerwacje];
 
 		#warning Należy zwrócić uwagę na relacje relguided. Ilość wystąpień: 3
+		#warning Dla tabeli 'Rezerwacja' wyliczono wielokrotną relację PrimaryRelations: Lot, Maszyna, Klient.
+
 		private static Soneta.Business.App.KeyInfo keyInfoRezerwacjaLot = new Soneta.Business.App.KeyInfo(tableInfoRezerwacje, table => new RezerwacjaTable.LotRelation(table)) {
 			Name = "Rezerwacja_Lot",
 			RelationTo = "Lot",
 			DeleteCascade = true,
+			PrimaryRelation = true,
 			Guided = RelationGuidedType.Inner,
 			CollectionName = "Fields",
 			SubTableCreator = (st, row) => new SubTable<Rezerwacja>(st, row),
@@ -1014,6 +1021,8 @@ namespace Soneta.Szkolenie {
 
 			protected RezerwacjaRow() : base(true) {
 			}
+
+			protected override Row PrimaryRow => (Row)Lot;
 
 			[MaxLength(6)]
 			[Required]

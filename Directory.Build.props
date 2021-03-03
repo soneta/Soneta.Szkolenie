@@ -3,7 +3,8 @@
   <PropertyGroup>
     <SonetaPackageVersion>2012.4.8</SonetaPackageVersion>
     <SonetaTargetFramework>net472</SonetaTargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AggregateOutput>true</AggregateOutput>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <SonetaAddonStartProgram>D:\Source\Repos\soneta.git\bin\Debug\SonetaExplorer.exe</SonetaAddonStartProgram>
   </PropertyGroup>
 </Project>
