@@ -839,15 +839,10 @@ namespace Soneta.Szkolenie {
 
 		public Rezerwacje Rezerwacje => (Rezerwacje)Session.Tables[tableInfoRezerwacje];
 
-		#warning Należy zwrócić uwagę na relacje relguided. Ilość wystąpień: 3
-		#warning Dla tabeli 'Rezerwacja' wyliczono wielokrotną relację PrimaryRelations: Lot, Maszyna, Klient.
-
 		private static Soneta.Business.App.KeyInfo keyInfoRezerwacjaLot = new Soneta.Business.App.KeyInfo(tableInfoRezerwacje, table => new RezerwacjaTable.LotRelation(table)) {
 			Name = "Rezerwacja_Lot",
 			RelationTo = "Lot",
 			DeleteCascade = true,
-			PrimaryRelation = true,
-			Guided = RelationGuidedType.Inner,
 			CollectionName = "Fields",
 			SubTableCreator = (st, row) => new SubTable<Rezerwacja>(st, row),
 			KeyFields = new[] {"Lot", "ID"},
@@ -857,7 +852,6 @@ namespace Soneta.Szkolenie {
 			Name = "Rezerwacja_Maszyna",
 			RelationTo = "Maszyna",
 			DeleteCascade = true,
-			Guided = RelationGuidedType.Inner,
 			CollectionName = "Fields",
 			SubTableCreator = (st, row) => new SubTable<Rezerwacja>(st, row),
 			KeyFields = new[] {"Maszyna", "ID"},
@@ -867,7 +861,6 @@ namespace Soneta.Szkolenie {
 			Name = "Rezerwacja_Klient",
 			RelationTo = "Kontrahent",
 			DeleteCascade = true,
-			Guided = RelationGuidedType.Inner,
 			CollectionName = "Fields",
 			SubTableCreator = (st, row) => new SubTable<Rezerwacja>(st, row),
 			KeyFields = new[] {"Klient", "ID"},
@@ -896,7 +889,7 @@ namespace Soneta.Szkolenie {
 		/// <seealso cref="Rezerwacja"/>
 		/// <seealso cref="Soneta.Business.Table"/>
 		[Caption("Tabela rezerwacji lotów dla klientów")]
-		public abstract partial class RezerwacjaTable : Table {
+		public abstract partial class RezerwacjaTable : GuidedTable {
 
 			protected RezerwacjaTable() {}
 
@@ -995,10 +988,13 @@ namespace Soneta.Szkolenie {
 			/// <seealso cref="Rezerwacja"/>
 			public new Rezerwacja[] this[int[] ids] => (Rezerwacja[])base[ids];
 
+			public new Rezerwacja this[Guid guid] => (Rezerwacja)base[guid];
+
 			protected override Row CreateRow(RowCreator creator) => new Rezerwacja();
 
 			[Soneta.Langs.TranslateIgnore]
 			protected override sealed void PrepareNames(StringBuilder names, string divider) {
+				names.Append(divider); names.Append("Guid");
 				names.Append(divider); names.Append("NrRezerwacji");
 				names.Append(divider); names.Append("Data");
 				names.Append(divider); names.Append("Lot");
@@ -1011,7 +1007,7 @@ namespace Soneta.Szkolenie {
 
 		}
 
-		public abstract partial class RezerwacjaRow : Row {
+		public abstract partial class RezerwacjaRow : GuidedRow {
 
 			private RezerwacjaRecord record;
 
@@ -1022,7 +1018,7 @@ namespace Soneta.Szkolenie {
 			protected RezerwacjaRow() : base(true) {
 			}
 
-			protected override Row PrimaryRow => (Row)Lot;
+			protected override Row PrimaryRow => null;
 
 			[MaxLength(6)]
 			[Required]
@@ -1078,7 +1074,6 @@ namespace Soneta.Szkolenie {
 					GetEdit(record==null, false);
 					if (value==null) throw new RequiredException(this, "Lot");
 					record.Lot = value;
-					LockGuidedRoot();
 					if (State!=RowState.Detached) {
 						ResyncSet(keyInfoRezerwacjaLot);
 					}
@@ -1099,7 +1094,6 @@ namespace Soneta.Szkolenie {
 					GetEdit(record==null, false);
 					if (value==null) throw new RequiredException(this, "Maszyna");
 					record.Maszyna = value;
-					LockGuidedRoot();
 					if (State!=RowState.Detached) {
 						ResyncSet(keyInfoRezerwacjaMaszyna);
 					}
@@ -1120,7 +1114,6 @@ namespace Soneta.Szkolenie {
 					GetEdit(record==null, false);
 					if (value==null) throw new RequiredException(this, "Klient");
 					record.Klient = value;
-					LockGuidedRoot();
 					if (State!=RowState.Detached) {
 						ResyncSet(keyInfoRezerwacjaKlient);
 					}
@@ -1258,13 +1251,9 @@ namespace Soneta.Szkolenie {
 				RezerwacjaSchema.OnRepacked?.Invoke((Rezerwacja)this);
 			}
 
-			protected override void LockGuidedRoot() => LockGuidedRoot((Row)Lot);
-
-			public override GuidedRow GetGuidedRoot() => ((Row)Lot)?.GetGuidedRoot();
-
 		}
 
-		public sealed class RezerwacjaRecord : Record {
+		public sealed class RezerwacjaRecord : GuidedRecord {
 			[Required]
 			[MaxLength(6)]
 			public string NrRezerwacji = "";
@@ -1289,6 +1278,7 @@ namespace Soneta.Szkolenie {
 			}
 
 			public override void Load(RecordReader creator) {
+				Guid = creator.Read_guid();
 				NrRezerwacji = creator.Read_string();
 				Data = creator.Read_date();
 				Lot = creator.Read_Row(tableInfoLoty);
