@@ -8,7 +8,7 @@ Ułatwienia przy tworzeniu i debuggowaniu dodatku.
 
 ## Zad.1
 
-Tworzenie własnegho widoku z danych  programu enova365 - szablon "Soneta - ViewInfo". Rejestracja widoku dla programu enova365.
+Tworzenie własnego widoku z danych  programu enova365 - szablon "Soneta - ViewInfo". Rejestracja widoku dla programu enova365.
 
     Soneta.Szkolenie.UI/ViewInfo/KlienciViewInfo.cs
     Soneta.Szkolenie.UI/ViewInfo/Klienci.viewform.xml
