@@ -2,26 +2,21 @@
 using Soneta.Szkolenie.UI;
 using Soneta.Test;
 using Soneta.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Soneta.Szkolenie.Tests
 {
-    public class UstawRabatParamsTest : DbTransactionTestBase
+    public class UstawRabatWorkerParamsTests : DbTransactionTestBase
     {
-        public override void ClassSetup()
+        public override void TestSetup()
         {
             // Konieczne jest wczytanie assembly dodatku
-            Assembly.Load("Soneta.Szkolenie");
-            base.ClassSetup();
+            LoadAssembly("Soneta.Szkolenie");
+            base.TestSetup();
         }
 
         [Test]
-        public void UstawRabatWorkerParams_WhenManipulated_CheckStates()
+        public void UstawRabatWorkerParamsTest()
         {
             var parameters = new UstawRabatWorkerParams(Context);
 
