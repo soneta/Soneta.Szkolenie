@@ -14,7 +14,6 @@ namespace Soneta.Szkolenie.Tests
     {
         public override void TestSetup()
         {
-            LoadAssembly("Soneta.Szkolenie");
             base.TestSetup();
 
             var listKontrahenciBuilders = new List<IRowBuilder<Kontrahent>>();

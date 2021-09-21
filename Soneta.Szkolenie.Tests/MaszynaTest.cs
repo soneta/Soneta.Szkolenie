@@ -7,16 +7,10 @@ namespace Soneta.Szkolenie.Tests {
 
     public class MaszynaTest : SzkolenieTestBase
     {
-        public override void TestSetup()
-        {
-            LoadAssembly("Soneta.Szkolenie");
-            base.TestSetup();
-        }
-
         [Test]
         public void NowaMaszynaTest()
         {
-            var maszynaBld = Nowy<Maszyna>()
+            var maszynaBld = NewRow<Maszyna>()
                 .DataProdukcji("1998-10-12")
                 .Producent("Cessna Ltd.")
                 .Model("172p SkyHawk")

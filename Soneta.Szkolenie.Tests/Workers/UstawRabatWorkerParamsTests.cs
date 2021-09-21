@@ -1,19 +1,14 @@
 ﻿using NUnit.Framework;
+using Soneta.Business;
 using Soneta.Szkolenie.UI;
-using Soneta.Test;
 using Soneta.Types;
-using System.Reflection;
 
 namespace Soneta.Szkolenie.Tests
 {
-    public class UstawRabatWorkerParamsTests : DbTransactionTestBase
+    public class UstawRabatWorkerParamsTests
     {
-        public override void TestSetup()
-        {
-            // Konieczne jest wczytanie assembly dodatku
-            LoadAssembly("Soneta.Szkolenie");
-            base.TestSetup();
-        }
+        [Context]
+        public Context Context { get; set; }
 
         [Test]
         public void UstawRabatWorkerParamsTest()
