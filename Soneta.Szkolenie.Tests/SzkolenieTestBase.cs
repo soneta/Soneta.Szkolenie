@@ -10,9 +10,7 @@ namespace Soneta.Szkolenie.Tests
 {
     public abstract class SzkolenieTestBase : DbTransactionTestBase
     {
-        protected static IRowBuilder<T> Nowy<T>() where T : Row
-        {
-            return new RowBuilder<T>();
-        }
+        protected static IRowBuilder<T> Nowy<T>() where T : Row 
+            => new RowBuilder<T>();
     }
 }

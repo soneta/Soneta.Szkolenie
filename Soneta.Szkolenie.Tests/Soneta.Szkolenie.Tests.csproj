@@ -7,7 +7,4 @@
     <ProjectReference Include="..\Soneta.Szkolenie\Soneta.Szkolenie.csproj" />
     <ProjectReference Include="..\Soneta.Szkolenie.UI\Soneta.Szkolenie.UI.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="ElzabWrapper.bySoneta" Version="1.0.0" />
-  </ItemGroup>
 </Project>

@@ -1,26 +1,33 @@
 using NUnit.Framework;
+using Soneta.Business;
 using Soneta.Test;
+using Soneta.Types;
 
 namespace Soneta.Szkolenie.Tests {
 
-    [TestFixture]
     public class MaszynaTest : SzkolenieTestBase
     {
+        public override void TestSetup()
+        {
+            LoadAssembly("Soneta.Szkolenie");
+            base.TestSetup();
+        }
 
         [Test]
         public void NowaMaszynaTest()
         {
-            var maszyna = Nowy<Maszyna>()
-                .NrBoczny("SP-ABC")
+            var maszynaBld = Nowy<Maszyna>()
+                .DataProdukcji("1998-10-12")
                 .Producent("Cessna Ltd.")
                 .Model("172p SkyHawk")
-                .DataProdukcji("1998-10-12")
-                .Build();
+                .NrBoczny("SP-DEF");
 
-            Assert.AreEqual("SP-ABC", maszyna.NrBoczny, "Źle podstawiony nr boczny");
+            Maszyna maszyna = null;
+
+            Assert.DoesNotThrow(() => maszyna = maszynaBld.Utwórz());
             Assert.AreEqual("Cessna Ltd.", maszyna.Producent, "Źle podstawiony producent");
             Assert.AreEqual("172p SkyHawk", maszyna.Model, "Źle podstawiony model");
-            Assert.AreEqual("1998-10-12", maszyna.DataProd, "Źle podstawiona data produkcji");
+            Assert.AreEqual(Date.Parse("1998-10-12"), maszyna.DataProd, "Źle podstawiona data produkcji");
         }
     }
 }
