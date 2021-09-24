@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Soneta.CRM;
 using Soneta.Test;
+using Soneta.Types;
 
 namespace Soneta.Szkolenie.Tests
 {
@@ -55,9 +56,9 @@ namespace Soneta.Szkolenie.Tests
                 .Lot("NL")
                 .Utwórz();
 
-            Assert.AreEqual(nowarezerwacja1.CenaLotu.ToString(), "2 400,00 PLN");
-            Assert.AreEqual(nowarezerwacja2.CenaLotu.ToString(), "2 400,00 PLN");
-            Assert.AreEqual(nowarezerwacja3.CenaLotu.ToString(), "2 100,00 PLN");
+            Assert.AreEqual(new Currency(2400d), nowarezerwacja1.CenaLotu);
+            Assert.AreEqual(new Currency(2400d), nowarezerwacja2.CenaLotu);
+            Assert.AreEqual(new Currency(2100d), nowarezerwacja3.CenaLotu);
         }
 
         [Test]
@@ -89,9 +90,9 @@ namespace Soneta.Szkolenie.Tests
                 .Lot("NL")
                 .Utwórz();
 
-            Assert.AreEqual(nowarezerwacja1.CenaLotu.ToString(), "2 400,00 PLN");
-            Assert.AreEqual(nowarezerwacja2.CenaLotu.ToString(), "2 100,00 PLN");
-            Assert.AreEqual(nowarezerwacja3.CenaLotu.ToString(), "1 500,00 PLN");
+            Assert.AreEqual(new Currency(2400d), nowarezerwacja1.CenaLotu);
+            Assert.AreEqual(new Currency(2100d), nowarezerwacja2.CenaLotu);
+            Assert.AreEqual(new Currency(1500d), nowarezerwacja3.CenaLotu);
         }
 
         [Test]
@@ -123,9 +124,9 @@ namespace Soneta.Szkolenie.Tests
                 .Lot("NL")
                 .Utwórz();
 
-            Assert.AreEqual(nowarezerwacja1.CenaLotu.ToString(), "2 400,00 PLN");
-            Assert.AreEqual(nowarezerwacja2.CenaLotu.ToString(), "2 400,00 PLN");
-            Assert.AreEqual(nowarezerwacja3.CenaLotu.ToString(), "2 400,00 PLN");
+            Assert.AreEqual(new Currency(2400d), nowarezerwacja1.CenaLotu);
+            Assert.AreEqual(new Currency(2400d), nowarezerwacja2.CenaLotu);
+            Assert.AreEqual(new Currency(2400d), nowarezerwacja3.CenaLotu);
         }
     }
 }
