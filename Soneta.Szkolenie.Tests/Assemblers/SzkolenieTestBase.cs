@@ -15,7 +15,7 @@ namespace Soneta.Szkolenie.Tests
         public override void ClassSetup()
         {
             LoadAssembly("Soneta.Szkolenie");
-            base.TestSetup();
+            base.ClassSetup();
         }
 
         protected static IRowBuilder<T> NewRow<T>() where T : Row 

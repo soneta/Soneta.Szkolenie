@@ -19,13 +19,10 @@ namespace Soneta.Szkolenie.Tests
 
             lot = Add(new Lot());
 
-            InUITransaction(() =>
-            {
-                lot.KodUslugi = "NL";
-                lot.Nazwa = "Nowy Lot";
-                lot.LokalizacjaMiejscowosc = "Warszawa";
-                lot.Cena = new Currency(3000d);
-            });
+            InUITransaction(() => lot.KodUslugi = "NL");
+            InUITransaction(() => lot.Nazwa = "Nowy Lot");
+            InUITransaction(() => lot.LokalizacjaMiejscowosc = "Warszawa");
+            InUITransaction(() => lot.Cena = new Currency(3000d));
 
             SaveDispose();
 
