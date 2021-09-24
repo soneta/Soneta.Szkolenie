@@ -3,8 +3,9 @@
   <PropertyGroup>
     <SonetaPackageVersion>2106.3.6</SonetaPackageVersion>
     <SonetaTargetFramework>net472</SonetaTargetFramework>
-    <AggregateOutput>true</AggregateOutput>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <SonetaAddonStartProgram>D:\Source\Repos\soneta.git\bin\Debug\SonetaExplorer.exe</SonetaAddonStartProgram>
+    <StartArguments>/extpath="$(OutputPath)\\"</StartArguments>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Soneta.Business.Licence" Version="$(SonetaPackageVersion)" />

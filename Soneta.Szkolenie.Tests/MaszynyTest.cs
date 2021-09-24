@@ -5,7 +5,7 @@ using Soneta.Types;
 
 namespace Soneta.Szkolenie.Tests {
 
-    public class MaszynaTest : SzkolenieTestBase
+    public class MaszynyTest : SzkolenieTestBase
     {
         [Test]
         public void NowaMaszynaTest()

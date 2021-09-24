@@ -10,26 +10,32 @@ using Soneta.Test;
 
 namespace Soneta.Szkolenie.Tests
 {
-    public class UstawRabatWorkerTests : SzkolenieTestBase
+    [TestFixture]
+    public class UstawRabatWorkerTests : RezerwacjeTestBase
     {
         public override void TestSetup()
         {
             base.TestSetup();
 
             var listKontrahenciBuilders = new List<IRowBuilder<Kontrahent>>();
-            var ctxList = new List<Kontrahent>();
 
             IRowBuilder<Kontrahent> builder = null;
             // Dodanie kontrahentów za pomocą utworzonych Assemblerów 
-            builder = NowyKontrahent("Nowy1");              listKontrahenciBuilders.Add(builder); ctxList.Add(builder.Build());
-            builder = NowyKontrahent("Nowy2", rabat: "10"); listKontrahenciBuilders.Add(builder); ctxList.Add(builder.Build());
-            builder = NowyKontrahent("Nowy3", rabat: "30"); listKontrahenciBuilders.Add(builder); ctxList.Add(builder.Build());
-            builder = NowyKontrahent("Nowy4");              listKontrahenciBuilders.Add(builder);
-            builder = NowyKontrahent("Nowy5", rabat: "10"); listKontrahenciBuilders.Add(builder);
-            builder = NowyKontrahent("Nowy6", rabat: "30"); listKontrahenciBuilders.Add(builder);
+            listKontrahenciBuilders.Add(NowyKontrahent("Nowy1"));
+            listKontrahenciBuilders.Add(NowyKontrahent("Nowy2", rabat: "10"));
+            listKontrahenciBuilders.Add(NowyKontrahent("Nowy3", rabat: "30"));
+            listKontrahenciBuilders.Add(NowyKontrahent("Nowy4"));
+            listKontrahenciBuilders.Add(NowyKontrahent("Nowy5", rabat: "10"));
+            listKontrahenciBuilders.Add(NowyKontrahent("Nowy6", rabat: "30"));
 
             listKontrahenciBuilders.ToArray().Utwórz();
-            Context.Set(ctxList.ToArray());
+
+            Context.Set(new Kontrahent[]
+            {
+                GetKontrahent("Nowy1"),
+                GetKontrahent("Nowy2"),
+                GetKontrahent("Nowy3")
+            });
         }
 
         [Test]
@@ -83,30 +89,5 @@ namespace Soneta.Szkolenie.Tests
             Assert.AreEqual(Percent.Parse("30%"), GetKontrahent("Nowy6").RabatTowaru);
         }
 
-        private void RunUstawRabatWorker(string rabat, bool dodawac, bool obnizac)
-        {
-            var worker = Context.CreateObject(null,
-                typeof(UstawRabatWorker),
-                new UstawRabatWorkerParams(Context)
-                {
-                    Rabat = Percent.Parse(rabat),
-                    DodawacRabaty = dodawac,
-                    ObnizacRabaty = obnizac
-                }) as UstawRabatWorker;
-
-            if (worker.UstawRabat() is MessageBoxInformation result)
-                result.YesHandler();
-        }
-
-        private IRowBuilder<Kontrahent> NowyKontrahent(string kod, string nazwa = null, string rabat = "0")
-        {
-            IRowBuilder<Kontrahent> builder = new RowBuilder<Kontrahent>();
-            return builder
-                .Enqueue(kth => kth.Kod = kod)
-                .Enqueue(kth => kth.Nazwa = string.IsNullOrEmpty(nazwa) ? kod : nazwa)
-                .Enqueue(kth => kth.RabatTowaru = Percent.Parse(rabat));
-        }
-
-        private Kontrahent GetKontrahent(string symbol) => Session.GetCRM().Kontrahenci.WgKodu[symbol];
     }
 }
