@@ -3,4 +3,8 @@
   <PropertyGroup>
     <TargetFramework>$(SonetaTargetFramework)</TargetFramework>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Soneta.Szkolenie\Soneta.Szkolenie.csproj" />
+    <ProjectReference Include="..\Soneta.Szkolenie.UI\Soneta.Szkolenie.UI.csproj" />
+  </ItemGroup>
 </Project>

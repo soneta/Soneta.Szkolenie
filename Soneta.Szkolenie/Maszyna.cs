@@ -34,7 +34,7 @@ namespace Soneta.Szkolenie
             }
 
             // funkcja zwracająca komunikat wyświetlany w przypadku błędu
-            public override string Description => "Wymagane jest aby w numerze bocznym znajdował się znak -";
+            public override string Description => "Wymagane jest aby w numerze bocznym znajdował się znak \"-\"";
         }
     }
 }

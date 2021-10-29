@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <SonetaPackageVersion>2104.0.2</SonetaPackageVersion>
+    <SonetaPackageVersion>2106.3.6</SonetaPackageVersion>
     <SonetaTargetFramework>net472</SonetaTargetFramework>
-    <AggregateOutput>true</AggregateOutput>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <SonetaAddonStartProgram>D:\Source\Repos\soneta.git\bin\Debug\SonetaExplorer.exe</SonetaAddonStartProgram>
+    <StartArguments>/extpath="$(OutputPath)\\"</StartArguments>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Soneta.Business.Licence" Version="$(SonetaPackageVersion)" />
+  </ItemGroup>
 </Project>
