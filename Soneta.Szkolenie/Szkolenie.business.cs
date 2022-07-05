@@ -42,12 +42,12 @@ namespace Soneta.Szkolenie {
 		[Browsable(false)]
 		public CRMModule CRM => moduleCRM ?? (moduleCRM = CRMModule.GetInstance(Session));
 
-		private static Soneta.Business.App.TableInfo tableInfoLoty = new Soneta.Business.App.TableInfo.Create<Loty, Lot, LotRecord>("Lot") {
+		public static readonly Soneta.Business.App.TableInfo LotyTableInfo = new Soneta.Business.App.TableInfo.Create<Loty, Lot, LotRecord>("Lot") {
 		};
 
-		public Loty Loty => (Loty)Session.Tables[tableInfoLoty];
+		public Loty Loty => (Loty)Session.Tables[LotyTableInfo];
 
-		private static Soneta.Business.App.KeyInfo keyInfoLotWgKod = new Soneta.Business.App.KeyInfo(tableInfoLoty, table => new LotTable.WgKodKey(table)) {
+		private static Soneta.Business.App.KeyInfo keyInfoLotWgKod = new Soneta.Business.App.KeyInfo(LotyTableInfo, table => new LotTable.WgKodKey(table)) {
 			Name = "WgKod",
 			Unique = true,
 			PrimaryKey = true,
@@ -89,6 +89,8 @@ namespace Soneta.Szkolenie {
 			/// </summary>
 			/// <seealso cref="SzkolenieModule"/>
 			public new SzkolenieModule Module => (SzkolenieModule)base.Module;
+
+			public System.Linq.IQueryable<Lot> AsQuery() => AsQuery<Lot>();
 
 			/// <summary>
 			/// Typowany indekser dostarczający obiekty znajdujące się w tej tabeli przy pomocy 
@@ -260,7 +262,7 @@ namespace Soneta.Szkolenie {
 			[Browsable(false)]
 			public SzkolenieModule Module => Table.Module;
 
-			protected override Soneta.Business.App.TableInfo TableInfo => tableInfoLoty;
+			protected override Soneta.Business.App.TableInfo TableInfo => LotyTableInfo;
 
 			public sealed override AccessRights GetObjectRight() {
 				AccessRights ar = CalcObjectRight();
@@ -453,12 +455,12 @@ namespace Soneta.Szkolenie {
 
 		}
 
-		private static Soneta.Business.App.TableInfo tableInfoMaszyny = new Soneta.Business.App.TableInfo.Create<Maszyny, Maszyna, MaszynaRecord>("Maszyna") {
+		public static readonly Soneta.Business.App.TableInfo MaszynyTableInfo = new Soneta.Business.App.TableInfo.Create<Maszyny, Maszyna, MaszynaRecord>("Maszyna") {
 		};
 
-		public Maszyny Maszyny => (Maszyny)Session.Tables[tableInfoMaszyny];
+		public Maszyny Maszyny => (Maszyny)Session.Tables[MaszynyTableInfo];
 
-		private static Soneta.Business.App.KeyInfo keyInfoMaszynaWgNrBoczny = new Soneta.Business.App.KeyInfo(tableInfoMaszyny, table => new MaszynaTable.WgNrBocznyKey(table)) {
+		private static Soneta.Business.App.KeyInfo keyInfoMaszynaWgNrBoczny = new Soneta.Business.App.KeyInfo(MaszynyTableInfo, table => new MaszynaTable.WgNrBocznyKey(table)) {
 			Name = "WgNrBoczny",
 			Unique = true,
 			PrimaryKey = true,
@@ -500,6 +502,8 @@ namespace Soneta.Szkolenie {
 			/// </summary>
 			/// <seealso cref="SzkolenieModule"/>
 			public new SzkolenieModule Module => (SzkolenieModule)base.Module;
+
+			public System.Linq.IQueryable<Maszyna> AsQuery() => AsQuery<Maszyna>();
 
 			/// <summary>
 			/// Typowany indekser dostarczający obiekty znajdujące się w tej tabeli przy pomocy 
@@ -652,7 +656,7 @@ namespace Soneta.Szkolenie {
 			[Browsable(false)]
 			public SzkolenieModule Module => Table.Module;
 
-			protected override Soneta.Business.App.TableInfo TableInfo => tableInfoMaszyny;
+			protected override Soneta.Business.App.TableInfo TableInfo => MaszynyTableInfo;
 
 			public sealed override AccessRights GetObjectRight() {
 				AccessRights ar = CalcObjectRight();
@@ -834,12 +838,12 @@ namespace Soneta.Szkolenie {
 
 		}
 
-		private static Soneta.Business.App.TableInfo tableInfoRezerwacje = new Soneta.Business.App.TableInfo.Create<Rezerwacje, Rezerwacja, RezerwacjaRecord>("Rezerwac") {
+		public static readonly Soneta.Business.App.TableInfo RezerwacjeTableInfo = new Soneta.Business.App.TableInfo.Create<Rezerwacje, Rezerwacja, RezerwacjaRecord>("Rezerwac") {
 		};
 
-		public Rezerwacje Rezerwacje => (Rezerwacje)Session.Tables[tableInfoRezerwacje];
+		public Rezerwacje Rezerwacje => (Rezerwacje)Session.Tables[RezerwacjeTableInfo];
 
-		private static Soneta.Business.App.KeyInfo keyInfoRezerwacjaLot = new Soneta.Business.App.KeyInfo(tableInfoRezerwacje, table => new RezerwacjaTable.LotRelation(table)) {
+		private static Soneta.Business.App.KeyInfo keyInfoRezerwacjaLot = new Soneta.Business.App.KeyInfo(RezerwacjeTableInfo, table => new RezerwacjaTable.LotRelation(table)) {
 			Name = "Rezerwacja_Lot",
 			RelationTo = "Lot",
 			DeleteCascade = true,
@@ -848,7 +852,7 @@ namespace Soneta.Szkolenie {
 			KeyFields = new[] {"Lot", "ID"},
 		};
 
-		private static Soneta.Business.App.KeyInfo keyInfoRezerwacjaMaszyna = new Soneta.Business.App.KeyInfo(tableInfoRezerwacje, table => new RezerwacjaTable.MaszynaRelation(table)) {
+		private static Soneta.Business.App.KeyInfo keyInfoRezerwacjaMaszyna = new Soneta.Business.App.KeyInfo(RezerwacjeTableInfo, table => new RezerwacjaTable.MaszynaRelation(table)) {
 			Name = "Rezerwacja_Maszyna",
 			RelationTo = "Maszyna",
 			DeleteCascade = true,
@@ -857,7 +861,7 @@ namespace Soneta.Szkolenie {
 			KeyFields = new[] {"Maszyna", "ID"},
 		};
 
-		private static Soneta.Business.App.KeyInfo keyInfoRezerwacjaKlient = new Soneta.Business.App.KeyInfo(tableInfoRezerwacje, table => new RezerwacjaTable.KlientRelation(table)) {
+		private static Soneta.Business.App.KeyInfo keyInfoRezerwacjaKlient = new Soneta.Business.App.KeyInfo(RezerwacjeTableInfo, table => new RezerwacjaTable.KlientRelation(table)) {
 			Name = "Rezerwacja_Klient",
 			RelationTo = "Kontrahent",
 			DeleteCascade = true,
@@ -866,14 +870,14 @@ namespace Soneta.Szkolenie {
 			KeyFields = new[] {"Klient", "ID"},
 		};
 
-		private static Soneta.Business.App.KeyInfo keyInfoRezerwacjaWgNrRezerwacji = new Soneta.Business.App.KeyInfo(tableInfoRezerwacje, table => new RezerwacjaTable.WgNrRezerwacjiKey(table)) {
+		private static Soneta.Business.App.KeyInfo keyInfoRezerwacjaWgNrRezerwacji = new Soneta.Business.App.KeyInfo(RezerwacjeTableInfo, table => new RezerwacjaTable.WgNrRezerwacjiKey(table)) {
 			Name = "WgNrRezerwacji",
 			Unique = true,
 			PrimaryKey = true,
 			KeyFields = new[] {"NrRezerwacji"},
 		};
 
-		private static Soneta.Business.App.KeyInfo keyInfoRezerwacjaWgDaty = new Soneta.Business.App.KeyInfo(tableInfoRezerwacje, table => new RezerwacjaTable.WgDatyKey(table)) {
+		private static Soneta.Business.App.KeyInfo keyInfoRezerwacjaWgDaty = new Soneta.Business.App.KeyInfo(RezerwacjeTableInfo, table => new RezerwacjaTable.WgDatyKey(table)) {
 			Name = "WgDaty",
 			KeyFields = new[] {"Data", "ID"},
 		};
@@ -969,6 +973,8 @@ namespace Soneta.Szkolenie {
 			/// </summary>
 			/// <seealso cref="SzkolenieModule"/>
 			public new SzkolenieModule Module => (SzkolenieModule)base.Module;
+
+			public System.Linq.IQueryable<Rezerwacja> AsQuery() => AsQuery<Rezerwacja>();
 
 			/// <summary>
 			/// Typowany indekser dostarczający obiekty znajdujące się w tej tabeli przy pomocy 
@@ -1156,7 +1162,7 @@ namespace Soneta.Szkolenie {
 			[Browsable(false)]
 			public SzkolenieModule Module => Table.Module;
 
-			protected override Soneta.Business.App.TableInfo TableInfo => tableInfoRezerwacje;
+			protected override Soneta.Business.App.TableInfo TableInfo => RezerwacjeTableInfo;
 
 			public sealed override AccessRights GetObjectRight() {
 				AccessRights ar = CalcObjectRight();
@@ -1281,8 +1287,8 @@ namespace Soneta.Szkolenie {
 				Guid = creator.Read_guid();
 				NrRezerwacji = creator.Read_string();
 				Data = creator.Read_date();
-				Lot = creator.Read_Row(tableInfoLoty);
-				Maszyna = creator.Read_Row(tableInfoMaszyny);
+				Lot = creator.Read_Row(LotyTableInfo);
+				Maszyna = creator.Read_Row(MaszynyTableInfo);
 				Klient = creator.Read_Row("Kontrahenci");
 				CenaLotu = creator.Read_currency();
 				CzyOplacona = (CzyOplacone)creator.Read_int();
